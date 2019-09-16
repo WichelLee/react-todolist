@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import 'antd/dist/antd.css'
 
 import store from './store/index'
-import { getInputChangeAction, saveInputValue, deleteTodoItem } from './store/actionCreators'
+import { getInputChangeAction, saveInputValue, deleteTodoItem, initListAction } from './store/actionCreators'
 import TodoListUI from './components/TodoListUI'
 class TodoList extends Component {
 	constructor(props) {
@@ -24,6 +25,18 @@ class TodoList extends Component {
 				handleDeleteItem={this.handleDeleteItem}
 			/>
 		)
+	}
+
+	componentDidMount() {
+		axios.get('/api/todolist').then(res => {
+			if (res.status === 200 && res.statusText === 'OK') {
+				const { list } = res.data;
+				const action = initListAction(list);
+				store.dispatch(action);
+			}
+		}).catch(err => {
+			console.log(err);
+		})
 	}
 
 	handleInputChange(e) {
