@@ -28,6 +28,7 @@ class TodoList extends Component {
   }
 
   componentDidMount() {
+    // 异步操作
     const action = getTodoList();
     store.dispatch(action);
   }
