@@ -29,9 +29,10 @@ export default (state = defaultState, action) => {
   // 初始化列表
   if (action.type === INIT_LIST_ACTION) {
     const newState = JSON.parse(JSON.stringify(state));
-    console.log(action.data);
+    console.log('reducer',action.data);
     newState.list = action.data;
     return newState;
   }
+
   return state;
 }

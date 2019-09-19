@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-
+// import axios from 'axios'
 import 'antd/dist/antd.css'
 
 import store from './store/index'
-import { getInputChangeAction, saveInputValue, deleteTodoItem, getTodoList } from './store/actionCreators'
+import { getInputChangeAction, saveInputValue, deleteTodoItem, getInitList } from './store/actionCreators'
 import TodoListUI from './components/TodoListUI'
 class TodoList extends Component {
   constructor(props) {
@@ -28,8 +28,8 @@ class TodoList extends Component {
   }
 
   componentDidMount() {
-    // 异步操作
-    const action = getTodoList();
+    const action = getInitList();
+    console.log('did mount',action);
     store.dispatch(action);
   }
 
